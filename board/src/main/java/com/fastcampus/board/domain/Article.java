@@ -11,6 +11,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -54,13 +55,17 @@ Auditing 을 활용하여 자동으로 세팅할 수 있어야한다.
 @LastModifiedDate
 @LastModifiedBy
 */
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) // 날짜 포맷 도와준다
     @CreatedDate
+    @Column(nullable = false, updatable = false) // 최초 생성된 후 업데이트를 막는다.
     private LocalDateTime createdAt; // 생성일
     @CreatedBy
     @Column(nullable = false, length = 100)
     private String createdBy; //생성자 -> 사용자 정보를 넣어주기 위해 JpaConfig에서 auditorAware로 찾는다.
     @LastModifiedDate
     private LocalDateTime modifiedAt; //수정일
+
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) // 날짜 포맷 도와준다
     @LastModifiedBy
     @Column(nullable = false, length = 100)
     private String modifiedBy; // 수정자 -> 사용자 정보를 넣어주기 위해 JpaConfig에서 auditorAware로 찾는다.

@@ -27,12 +27,13 @@ spring:
       hibernate:
         format_sql: true
         default_batch_fetch_size: 100
-  h2:
-    console:
-      enabled: true
   sql:
     init:
       mode: always
+  data:
+    rest:
+      base-path: /api
+      detection-strategy: annotated #api로 노출 시킬지 여부를 정하는 전략 // default(기본값 - 퍼블릿 리포지토리),annotated(어노테이션 지정한 리포지토리만),all(전부),visibility(only 퍼블릭 리포지토리)
 
 #---
 #spring:
